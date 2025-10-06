@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration - Financial Services</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Registration Form Page -->
+        <div id="formPage" class="page active">
+            <div class="container">
+                <div class="form-wrapper">
+                    <div class="brand-header">
+                        <h1 class="brand-title">FinanceHub</h1>
+                        <p class="brand-subtitle">Your Trusted Financial Partner</p>
+                    </div>
+                    
+                    <div class="form-container">
+                        <div class="form-header">
+                            <h2>Customer Registration</h2>
+                            <p>Please fill in your details to get started</p>
+                        </div>
+                        
+                        <form id="registrationForm" class="registration-form">
+                            <div class="form-group">
+                                <label for="fullName" class="form-label">Full Name *</label>
+                                <input 
+                                    type="text" 
+                                    id="fullName" 
+                                    name="fullName"
+                                    class="form-control" 
+                                    placeholder="Enter your full name"
+                                    required
+                                >
+                                <div class="error-message" id="fullNameError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mobileNumber" class="form-label">Mobile Number *</label>
+                                <input 
+                                    type="tel" 
+                                    id="mobileNumber" 
+                                    name="mobileNumber"
+                                    class="form-control" 
+                                    placeholder="+91 XXXXX XXXXX"
+                                    required
+                                >
+                                <div class="error-message" id="mobileNumberError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="emailId" class="form-label">Email ID *</label>
+                                <input 
+                                    type="email" 
+                                    id="emailId" 
+                                    name="emailId"
+                                    class="form-control" 
+                                    placeholder="your.email@example.com"
+                                    required
+                                >
+                                <div class="error-message" id="emailIdError"></div>
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input 
+                                        type="checkbox" 
+                                        id="termsCheckbox" 
+                                        name="termsAccepted"
+                                        required
+                                    >
+                                    <span class="checkmark"></span>
+                                    <span class="checkbox-text">
+                                        I agree to the 
+                                        <a href="#" id="termsLink" class="terms-link">Terms and Conditions</a>
+                                    </span>
+                                </label>
+                                <div class="error-message" id="termsError"></div>
+                            </div>
+                            
+                            <button type="submit" id="submitBtn" class="btn btn--primary btn--full-width" disabled>
+                                <span class="btn-text">Submit Registration</span>
+                                <div class="loading-spinner hidden"></div>
+                            </button>
+                        </form>
+                        
+                        <div id="successMessage" class="success-message hidden">
+                            <div class="success-icon">✓</div>
+                            <h3>Registration Successful!</h3>
+                            <p>Thank you for registering with us. We will contact you shortly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Terms and Conditions Page -->
+        <div id="termsPage" class="page">
+            <div class="container">
+                <div class="terms-wrapper">
+                    <div class="terms-header">
+                        <button id="backToForm" class="btn btn--outline back-btn">
+                            ← Back to Form
+                        </button>
+                        <h1>Terms and Conditions - Financial Services</h1>
+                        <p class="terms-subtitle">Please read these terms carefully before proceeding</p>
+                    </div>
+                    
+                    <div class="terms-content">
+                        <section class="terms-section">
+                            <h3>1. Risk Disclosure</h3>
+                            <p>Trading in financial markets involves substantial risk of loss and may not be suitable for all investors. The value of investments can go down as well as up, and you may not get back the amount you originally invested. Past performance is not indicative of future results and should not be relied upon as the sole factor in making investment decisions.</p>
+                            <p>Market volatility can result in significant losses within short periods. All participants must be prepared for the possibility of losing their entire investment capital.</p>
+                        </section>
+                        
+                        <section class="terms-section">
+                            <h3>2. Liability Disclaimer</h3>
+                            <p>The company, its directors, employees, and affiliated entities shall not be liable for any direct, indirect, incidental, consequential, or punitive losses or damages arising from:</p>
+                            <ul>
+                                <li>Your trading activities or investment decisions</li>
+                                <li>Market fluctuations or system failures</li>
+                                <li>Loss of profits, revenue, or business opportunities</li>
+                                <li>Interruption of services or technical issues</li>
+                                <li>Any reliance on information, advice, or recommendations provided</li>
+                            </ul>
+                            <p>By using our services, you acknowledge and accept full responsibility for all investment decisions and their outcomes.</p>
+                        </section>
+                        
+                        <section class="terms-section">
+                            <h3>3. SEBI Compliance and Regulatory Framework</h3>
+                            <p>All trading and investment activities are subject to Securities and Exchange Board of India (SEBI) regulations and guidelines. Users must ensure compliance with applicable laws including:</p>
+                            <ul>
+                                <li>SEBI (Investment Advisers) Regulations, 2013</li>
+                                <li>SEBI (Portfolio Managers) Regulations, 2020</li>
+                                <li>Prevention of Money Laundering Act (PMLA) requirements</li>
+                                <li>Know Your Customer (KYC) norms</li>
+                                <li>Foreign Exchange Management Act (FEMA) provisions where applicable</li>
+                            </ul>
+                            <p>The company operates under the regulatory framework established by SEBI and other relevant financial authorities in India.</p>
+                        </section>
+                        
+                        <section class="terms-section">
+                            <h3>4. Risk Management Principles</h3>
+                            <p>Users are solely responsible for implementing appropriate risk management strategies including but not limited to:</p>
+                            <ul>
+                                <li>Position sizing appropriate to their risk tolerance and financial capacity</li>
+                                <li>Setting and adhering to stop-loss levels</li>
+                                <li>Diversification across asset classes and investment instruments</li>
+                                <li>Regular portfolio review and rebalancing</li>
+                                <li>Maintaining adequate emergency funds separate from investment capital</li>
+                                <li>Understanding correlation risks in their holdings</li>
+                            </ul>
+                            <p>The company may provide educational materials on risk management but users must make independent decisions based on their individual circumstances.</p>
+                        </section>
+                        
+                        <section class="terms-section">
+                            <h3>5. Investment Suitability and Due Diligence</h3>
+                            <p>Before making any investment decisions, users must:</p>
+                            <ul>
+                                <li>Assess their own financial situation, investment objectives, and risk tolerance</li>
+                                <li>Seek independent financial advice where necessary</li>
+                                <li>Understand the nature and risks of each financial instrument</li>
+                                <li>Ensure they have sufficient knowledge and experience for complex products</li>
+                                <li>Review all relevant documentation and disclosures</li>
+                            </ul>
+                        </section>
+                        
+                        <section class="terms-section">
+                            <h3>6. Data Protection and Privacy</h3>
+                            <p>Personal information collected through this registration will be used in accordance with our Privacy Policy and applicable data protection laws including:</p>
+                            <ul>
+                                <li>Information Technology (Reasonable Security Practices) Rules, 2011</li>
+                                <li>Digital Personal Data Protection Act, 2023</li>
+                                <li>RBI guidelines on data protection and cybersecurity</li>
+                            </ul>
+                            <p>Your data will be processed for account management, regulatory compliance, and service provision purposes.</p>
+                        </section>
+                        
+                        <section class="terms-section">
+                            <h3>7. Market Risks and Disclaimers</h3>
+                            <p>Financial markets are subject to various risks including:</p>
+                            <ul>
+                                <li>Market risk from price fluctuations</li>
+                                <li>Liquidity risk affecting ability to buy/sell</li>
+                                <li>Credit risk from counterparty default</li>
+                                <li>Operational risk from system failures</li>
+                                <li>Regulatory risk from policy changes</li>
+                                <li>Currency risk for foreign investments</li>
+                            </ul>
+                            <p>Past performance data, if provided, is for informational purposes only and does not guarantee future results.</p>
+                        </section>
+                        
+                        <section class="terms-section">
+                            <h3>8. Dispute Resolution</h3>
+                            <p>Any disputes arising from these terms or our services shall be resolved through:</p>
+                            <ul>
+                                <li>Initial attempt at amicable settlement through mutual discussion</li>
+                                <li>Mediation through recognized financial industry mediation services</li>
+                                <li>Arbitration under the Arbitration and Conciliation Act, 2015</li>
+                                <li>Courts in Mumbai, Maharashtra shall have exclusive jurisdiction</li>
+                            </ul>
+                        </section>
+                        
+                        <section class="terms-section">
+                            <h3>9. Amendment and Modification</h3>
+                            <p>These terms may be updated periodically to reflect regulatory changes or business requirements. Users will be notified of material changes and continued use of services constitutes acceptance of updated terms.</p>
+                        </section>
+                        
+                        <section class="terms-section">
+                            <h3>10. Acknowledgment</h3>
+                            <p>By proceeding with registration, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. You confirm that you are of legal age and have the authority to enter into this agreement.</p>
+                        </section>
+                    </div>
+                    
+                    <div class="terms-footer">
+                        <button id="backToFormBottom" class="btn btn--primary">
+                            I Have Read and Understood - Back to Form
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
