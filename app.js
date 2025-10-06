@@ -298,7 +298,7 @@ async function handleFormSubmit(e) {
 // Submit data to Google Sheets
 async function submitToGoogleSheets(formData) {
     // Google Apps Script Web App URL - Replace with your actual script URL
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbw1nN8DOX9Bp0wo9984dQIlzT6jiNW5-YMq8lhVc9kSgtZWZ4JZQ_eYTROmwjkApT0rcA/exec';
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxi_PCcPlgEvB-3VMQTifnUiMgRQqGfcXyJPvIMgqTf8r5OU-L78AbMDsI1ddfIc0WiXA/exec';
     
     // For demo purposes, we'll simulate the submission
     return new Promise((resolve, reject) => {
