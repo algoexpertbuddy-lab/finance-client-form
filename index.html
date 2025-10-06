@@ -39,14 +39,9 @@
                             
                             <div class="form-group">
                                 <label for="mobileNumber" class="form-label">Mobile Number *</label>
-                                <input 
-                                    type="tel" 
-                                    id="mobileNumber" 
-                                    name="mobileNumber"
-                                    class="form-control" 
-                                    placeholder="+91 XXXXX XXXXX"
-                                    required
-                                >
+
+                                <input type="tel" id="mobileNumber" name="mobileNumber" class="form-control" required maxlength="10" pattern="^[6-9][0-9]{9}$" placeholder="Enter your 10-digit mobile number">
+
                                 <div class="error-message" id="mobileNumberError"></div>
                             </div>
                             
