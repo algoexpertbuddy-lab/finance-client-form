@@ -16,7 +16,7 @@ const elements = {
     fullName: document.getElementById('fullName'),
     mobileNumber: document.getElementById('mobileNumber'),
     emailId: document.getElementById('emailId'),
-    tradingviewid: document.getElementById('tradingviewid'),
+    tradingviewId: document.getElementById('tradingviewId'), // ADD THIS LINE
     termsCheckbox: document.getElementById('termsCheckbox'),
     submitBtn: document.getElementById('submitBtn'),
     
@@ -34,6 +34,8 @@ const elements = {
     fullNameError: document.getElementById('fullNameError'),
     mobileNumberError: document.getElementById('mobileNumberError'),
     emailIdError: document.getElementById('emailIdError'),
+    tradingviewIdError: document.getElementById('tradingviewIdError'), // ADD THIS LINE
+
     termsError: document.getElementById('termsError')
 };
 
@@ -41,7 +43,9 @@ const elements = {
 const validation = {
     name: /^[a-zA-Z\s]{2,50}$/,
     mobile: /^[6-9][0-9]{9}$/,  // More flexible pattern for Indian mobile numbers
-    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    tradingview: /^[a-zA-Z0-9_]{3,20}$/ // ADD THIS LINE - alphanumeric and underscore, 3-20 chars
+
 };
 
 // Validation messages
@@ -57,6 +61,10 @@ const messages = {
     emailId: {
         empty: 'Email ID is required',
         invalid: 'Please enter a valid email address'
+    },
+    tradingviewId: { // ADD THIS BLOCK
+        empty: 'TradingView ID is required',
+        invalid: 'Please enter a valid TradingView username (3-20 characters, letters, numbers, underscore only)'
     },
     terms: {
         required: 'You must accept the terms and conditions to proceed'
@@ -98,6 +106,11 @@ function setupEventListeners() {
     
     elements.emailId.addEventListener('input', () => validateField('emailId'));
     elements.emailId.addEventListener('blur', () => validateField('emailId'));
+
+    // Add this line in the setupEventListeners function:
+    elements.tradingviewId.addEventListener('input', () => validateField('tradingviewId'));
+    elements.tradingviewId.addEventListener('blur', () => validateField('tradingviewId'));
+
     
     elements.termsCheckbox.addEventListener('change', () => {
         validateField('terms');
@@ -182,6 +195,18 @@ function validateField(fieldName) {
                 message = messages.emailId.invalid;
             }
             break;
+
+        case 'tradingviewId':
+            const tradingview = field.value.trim();
+            if (!tradingview) {
+                isValid = false;
+                message = messages.tradingviewId.empty;
+            } else if (!validation.tradingview.test(tradingview)) {
+                isValid = false;
+                message = messages.tradingviewId.invalid;
+            }
+            break;
+
             
         case 'terms':
             if (!field.checked) {
@@ -210,9 +235,12 @@ function checkFormValidity() {
     const isNameValid = elements.fullName.value.trim() ? validateField('fullName') : false;
     const isMobileValid = elements.mobileNumber.value.trim() ? validateField('mobileNumber') : false;
     const isEmailValid = elements.emailId.value.trim() ? validateField('emailId') : false;
+    const isTradingViewValid = elements.tradingviewId.value.trim() ? validateField('tradingviewId') : false; // ADD THIS LINE
+
     const isTermsAccepted = elements.termsCheckbox.checked;
     
-    const isFormValid = isNameValid && isMobileValid && isEmailValid && isTermsAccepted;
+    const isFormValid = isNameValid && isMobileValid && isEmailValid && isTradingViewValid && isTermsAccepted; // UPDATE THIS LINE
+
     
     elements.submitBtn.disabled = !isFormValid || app.isSubmitting;
     
@@ -229,6 +257,8 @@ async function handleFormSubmit(e) {
     const isNameValid = validateField('fullName');
     const isMobileValid = validateField('mobileNumber');
     const isEmailValid = validateField('emailId');
+    const isTradingViewValid = validateField('tradingviewId'); // ADD THIS LINE
+
     const isTermsAccepted = elements.termsCheckbox.checked;
     
     if (!isTermsAccepted) {
@@ -249,6 +279,8 @@ async function handleFormSubmit(e) {
         fullName: elements.fullName.value.trim(),
         mobileNumber: elements.mobileNumber.value.trim(),
         emailId: elements.emailId.value.trim(),
+        tradingviewid: elements.tradingviewId.value.trim(), // ADD THIS LINE
+
         termsAccepted: elements.termsCheckbox.checked,
         userAgent: navigator.userAgent
     };
@@ -353,7 +385,9 @@ function saveFormData() {
         const formData = {
             fullName: elements.fullName.value,
             mobileNumber: elements.mobileNumber.value,
-            emailId: elements.emailId.value
+            emailId: elements.emailId.value,
+            tradingviewId: elements.tradingviewId.value // ADD THIS LINE
+
         };
         localStorage.setItem('registrationFormData', JSON.stringify(formData));
     } catch (error) {
@@ -371,12 +405,16 @@ function loadSavedData() {
             if (formData.fullName) elements.fullName.value = formData.fullName;
             if (formData.mobileNumber) elements.mobileNumber.value = formData.mobileNumber;
             if (formData.emailId) elements.emailId.value = formData.emailId;
+            if (formData.tradingviewId) elements.tradingviewId.value = formData.tradingviewId; // ADD THIS LINE
+
             
             // Validate loaded data
             setTimeout(() => {
                 if (elements.fullName.value) validateField('fullName');
                 if (elements.mobileNumber.value) validateField('mobileNumber');
                 if (elements.emailId.value) validateField('emailId');
+                if (elements.tradingviewId.value) validateField('tradingviewId'); // ADD THIS LINE
+
                 checkFormValidity();
             }, 100);
         }
