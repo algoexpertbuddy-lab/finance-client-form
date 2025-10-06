@@ -16,6 +16,7 @@ const elements = {
     fullName: document.getElementById('fullName'),
     mobileNumber: document.getElementById('mobileNumber'),
     emailId: document.getElementById('emailId'),
+    tradingviewid: document.getElementById('tradingviewid'),
     termsCheckbox: document.getElementById('termsCheckbox'),
     submitBtn: document.getElementById('submitBtn'),
     
