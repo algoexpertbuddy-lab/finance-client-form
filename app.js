@@ -39,7 +39,7 @@ const elements = {
 // Validation patterns - Fixed mobile number validation
 const validation = {
     name: /^[a-zA-Z\s]{2,50}$/,
-    mobile: /^(\+91[\s\-]?)?[6789]\d{9}$/,  // More flexible pattern for Indian mobile numbers
+    mobile: /^[6-9][0-9]{9}$/,  // More flexible pattern for Indian mobile numbers
     email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 };
 
