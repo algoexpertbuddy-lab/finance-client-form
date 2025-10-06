@@ -130,33 +130,15 @@ function showPage(pageId) {
 }
 
 // Format mobile number input - Improved formatting
+// Only allow digits, no prefix, and restrict to 10 digits
 function formatMobileNumber() {
-    let value = elements.mobileNumber.value.replace(/\D/g, '');
-    
-    // Remove leading zeros and handle country code
-    if (value.startsWith('91') && value.length > 10) {
-        value = value.substring(2);
-    }
-    if (value.startsWith('0')) {
-        value = value.substring(1);
-    }
-    
-    // Limit to 10 digits for the actual mobile number
+    let value = elements.mobileNumber.value.replace(/\D/g, ''); // Remove non-digits
     if (value.length > 10) {
-        value = value.substring(0, 10);
+        value = value.substring(0, 10); // Limit to 10 digits
     }
-    
-    // Format as +91 XXXXX XXXXX only if we have enough digits
-    if (value.length === 10) {
-        value = `+91 ${value.substring(0, 5)} ${value.substring(5)}`;
-    } else if (value.length >= 5) {
-        value = `+91 ${value.substring(0, 5)} ${value.substring(5)}`;
-    } else if (value.length > 0) {
-        value = `+91 ${value}`;
-    }
-    
-    elements.mobileNumber.value = value;
+    elements.mobileNumber.value = value; // No prefix or space formatting
 }
+
 
 // Field validation - Fixed mobile validation logic
 function validateField(fieldName) {
@@ -178,22 +160,16 @@ function validateField(fieldName) {
             break;
             
         case 'mobileNumber':
-            const mobile = field.value.replace(/\D/g, ''); // Get only digits
+            const mobile = field.value.replace(/\D/g, ''); // Only digits
             if (!mobile) {
                 isValid = false;
                 message = messages.mobileNumber.empty;
-            } else if (mobile.length < 10) {
+            } else if (!/^[6-9][0-9]{9}$/.test(mobile)) {
                 isValid = false;
                 message = messages.mobileNumber.invalid;
-            } else {
-                // Check if it's a valid Indian mobile number (starts with 6, 7, 8, or 9)
-                const cleanNumber = mobile.length > 10 ? mobile.slice(-10) : mobile;
-                if (!/^[6789]\d{9}$/.test(cleanNumber)) {
-                    isValid = false;
-                    message = messages.mobileNumber.invalid;
-                }
             }
             break;
+
             
         case 'emailId':
             const email = field.value.trim();
@@ -273,7 +249,6 @@ async function handleFormSubmit(e) {
         mobileNumber: elements.mobileNumber.value.trim(),
         emailId: elements.emailId.value.trim(),
         termsAccepted: elements.termsCheckbox.checked,
-        timestamp: new Date().toISOString(),
         userAgent: navigator.userAgent
     };
     
@@ -307,10 +282,10 @@ async function submitToGoogleSheets(formData) {
             console.log('Form data submitted:', formData);
             
             // In a real implementation, you would use fetch:
-            /*
+            
             fetch(scriptUrl, {
                 method: 'POST',
-                mode: 'cors',
+                mode: 'no-cors',
                 cache: 'no-cache',
                 headers: {
                     'Content-Type': 'application/json',
@@ -326,7 +301,7 @@ async function submitToGoogleSheets(formData) {
                 }
             })
             .catch(error => reject(error));
-            */
+            
             
             resolve({ success: true, message: 'Registration successful' });
         }, 2000); // Simulate network delay
@@ -430,7 +405,6 @@ To connect this form to Google Sheets, follow these steps:
    - Mobile Number
    - Email ID
    - Terms Accepted
-   - Timestamp
    - User Agent
 
 2. Go to Google Apps Script (script.google.com)
@@ -450,7 +424,6 @@ function doPost(e) {
       data.mobileNumber,
       data.emailId,
       data.termsAccepted ? 'Yes' : 'No',
-      data.timestamp,
       data.userAgent
     ]);
     
