@@ -44,7 +44,7 @@ const validation = {
     name: /^[a-zA-Z\s]{2,50}$/,
     mobile: /^[6-9][0-9]{9}$/,  // More flexible pattern for Indian mobile numbers
     email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-    tradingview: /^[a-zA-Z0-9_]{3,20}$/ // ADD THIS LINE - alphanumeric and underscore, 3-20 chars
+    tradingview: /^[a-zA-Z0-9_]{3,30}$/ // ADD THIS LINE - alphanumeric and underscore, 3-20 chars
 
 };
 
